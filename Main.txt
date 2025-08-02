@@ -1,0 +1,22 @@
+-- Serviços
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Variáveis
+local noclip = true
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+-- Ativando Noclip
+RunService.Stepped:Connect(function()
+    if noclip and character then
+        for _, part in ipairs(character:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide then
+                part.CanCollide = false
+            end
+        end
+    end
+end)
+
+-- Mensagem de status
+print("✅ Noclip ativado com sucesso!")
